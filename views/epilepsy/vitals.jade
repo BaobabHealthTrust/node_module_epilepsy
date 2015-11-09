@@ -1,0 +1,123 @@
+extends layout
+
+block mainContent
+
+    script.
+        var current_height = #{current_height};
+        var patient_gender = "#{patient_gender}";
+        var patient_id = "#{id}";
+
+    script(src="/epilepsy/javascripts/jquery.js")
+    script(src="/epilepsy/javascripts/jquery.flot.js")
+    script(src="/epilepsy/javascripts/vitals.js")
+
+    form(id='form' action='/epilepsy/encounter/create/#{id}' method='post')
+
+        input(type='hidden' name='data[UUID]' value='#{uuid}')
+
+        input(type='hidden' name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][VITALS][UUID]' value='#{encounter_uuid}')
+
+        input(type='hidden' id='bmi' name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][VITALS][data][][BMI][response][value]')
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][VITALS][data][][BMI][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][VITALS][data][][BMI][concept][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][VITALS][data][][BMI][concept][name]'  value='BMI' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][VITALS][data][][BMI][response][category]'  value='NUMBER' )
+
+        input(type='hidden' id='cva' name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][VITALS][data][][CARDIOVASCULAR SYSTEM DIAGNOSIS][response][value]')
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][VITALS][data][][CARDIOVASCULAR SYSTEM DIAGNOSIS][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][VITALS][data][][CARDIOVASCULAR SYSTEM DIAGNOSIS][concept][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][VITALS][data][][CARDIOVASCULAR SYSTEM DIAGNOSIS][concept][name]'  value='CARDIOVASCULAR SYSTEM DIAGNOSIS' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][VITALS][data][][CARDIOVASCULAR SYSTEM DIAGNOSIS][response][category]'  value='TEXT' )
+
+        input(type='hidden' id='estimated' name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][VITALS][data][][PEAK FLOW PREDICTED][response][value]')
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][VITALS][data][][PEAK FLOW PREDICTED][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][VITALS][data][][PEAK FLOW PREDICTED][concept][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][VITALS][data][][PEAK FLOW PREDICTED][concept][name]'  value='PEAK FLOW PREDICTED' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][VITALS][data][][PEAK FLOW PREDICTED][response][category]'  value='TEXT' )
+
+        select(name='choice[]' disabled  helpText='Select vital signs <span id="helper">Vitals</span>' id='choice' multiple='multiple' optional='true')
+            option
+            option
+                | Blood Pressure
+            option
+                | Pulse Rate
+
+        input(type='text' helpText='Waist circumference (in cm) <span id="helper">Vitals</span>' field_type='number' pos='3' allowFreeText='true'
+                    condition='getSelected().match(/WAIST\\sCIRCUMFERENCE/i)' min='10' max='300' units='cm' tt_pageStyleClass='Numeric NumbersWithUnknownAndDecimal'
+                    id='waist_circumference' name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][VITALS][data][][WAIST CIRCUMFERENCE (IN CM)][response][value]')
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][VITALS][data][][WAIST CIRCUMFERENCE (IN CM)][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][VITALS][data][][WAIST CIRCUMFERENCE (IN CM)][concept][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][VITALS][data][][WAIST CIRCUMFERENCE (IN CM)][concept][name]'  value='WAIST CIRCUMFERENCE (IN CM)' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][VITALS][data][][WAIST CIRCUMFERENCE (IN CM)][response][category]'  value='NUMBER' )
+
+        input(type='text' id='temperature' helpText='Temperature  <span id="helper">Vitals</span>' field_type='number' pos='9' allowFreeText='true' condition='getSelected().match(/TEMPERATURE/i)' min='35' max='41' units='Degrees Celcius' tt_pageStyleClass='Numeric NumbersWithUnknownAndDecimal' name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][VITALS][data][][TEMPERATURE][response][value]')
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][VITALS][data][][TEMPERATURE][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][VITALS][data][][TEMPERATURE][concept][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][VITALS][data][][TEMPERATURE][concept][name]'  value='TEMPERATURE' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][VITALS][data][][TEMPERATURE][response][category]'  value='NUMBER' )
+
+        input(type='text' id='respiratory_rate' helpText='Respiratory rate<span id="helper">Vitals</span>' validationRule='([0-9]+(\\.[0-9])?)|Unknown$' validationMessage='You must enter a decimal between 0 and 9 (for example: 37<b>.6</b>)' field_type='number' min='8' max='61' condition='getSelected().match(/RESPIRATORY\\sRATE/i)' absoluteMin='0' absoluteMax='250' tt_pageStyleClass='Numeric NumbersWithUnknownAndDecimal' name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][VITALS][data][][RESPIRATORY RATE][response][value]')
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][VITALS][data][][RESPIRATORY RATE][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][VITALS][data][][RESPIRATORY RATE][concept][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][VITALS][data][][RESPIRATORY RATE][concept][name]'  value='RESPIRATORY RATE' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][VITALS][data][][RESPIRATORY RATE][response][category]'  value='NUMBER' )
+
+        input(type='text' id='expiratory_flow_rate' helpText='Expiratory flow rate (Litres per minute)<span id="helper">Vitals</span>' field_type='number' pos='6' min='50' max='800' condition='getSelected().match(/EXPIRATORY\\sFLOW\\sRATE/i)' absoluteMin='0' absoluteMax='1000' tt_pageStyleClass='Numeric NumbersWithUnknownAndDecimal' name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][VITALS][data][][PEAK FLOW][response][value]')
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][VITALS][data][][PEAK FLOW][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][VITALS][data][][PEAK FLOW][concept][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][VITALS][data][][PEAK FLOW][concept][name]'  value='PEAK FLOW' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][VITALS][data][][PEAK FLOW][response][category]'  value='NUMBER' )
+
+        input(type='text' id='systolic_blood_pressure' helpText='Systolic blood pressure<span id="helper">Vitals</span>' field_type='number' pos='4' tt_pageStyleClass='NumbersWithUnknown'
+                tt_onLoad='timedEvent = setTimeout("calculateBP(1)", 100);' tt_onUnLoad='clearTimeout(timedEvent);' condition='getSelected().match(/BLOOD\\sPRESSURE/i)'
+                absoluteMin='0' max='250' name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][VITALS][data][][SYSTOLIC BLOOD PRESSURE][response][value]')
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][VITALS][data][][SYSTOLIC BLOOD PRESSURE][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][VITALS][data][][SYSTOLIC BLOOD PRESSURE][concept][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][VITALS][data][][SYSTOLIC BLOOD PRESSURE][concept][name]'  value='SYSTOLIC BLOOD PRESSURE' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][VITALS][data][][SYSTOLIC BLOOD PRESSURE][response][category]'  value='NUMBER' )
+
+        input(type='text' id='diastolic_blood_pressure' helpText='Diastolic blood pressure <span id="helper">Vitals</span>' field_type='number' pos='5'
+                tt_pageStyleClass='NumbersWithUnknown' tt_onLoad='timedEvent = setTimeout("calculateBP(2)", 100);'
+                tt_onUnLoad='clearTimeout(timedEvent);' condition='getSelected().match(/BLOOD\\sPRESSURE/i)'
+                absoluteMin='0' max='180' name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][VITALS][data][][DIASTOLIC BLOOD PRESSURE][response][value]')
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][VITALS][data][][DIASTOLIC BLOOD PRESSURE][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][VITALS][data][][DIASTOLIC BLOOD PRESSURE][concept][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][VITALS][data][][DIASTOLIC BLOOD PRESSURE][concept][name]'  value='DIASTOLIC BLOOD PRESSURE' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][VITALS][data][][DIASTOLIC BLOOD PRESSURE][response][category]'  value='NUMBER' )
+
+        input(type='text' id='pulse' helpText='Pulse rate<span id="helper">Vitals</span>' field_type='number' tt_onLoad='timedEvent = setTimeout("calculateBP(3)", 100);'
+                tt_onUnLoad='clearTimeout(timedEvent);' pos='7' condition='getSelected().match(/PULSE\\sRATE/i)' min='50' max='120' units='bpm' tt_pageStyleClass='Numeric NumbersWithUnknownAndDecimal' name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][VITALS][data][][PULSE][response][value]')
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][VITALS][data][][PULSE][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][VITALS][data][][PULSE][concept][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][VITALS][data][][PULSE][concept][name]'  value='PULSE' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][VITALS][data][][PULSE][response][category]'  value='NUMBER' )
+
+        - if(!current_height || current_height <= 0 || patient_age < 14) {
+
+            input(type='text' id='height' helpText='Height (cm)<span id="helper">Vitals</span>' field_type='number' tt_pageStyleClass='Numeric NumbersWithUnknown' min='50' max='180' name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][VITALS][data][][HEIGHT (CM)][response][value]')
+            input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][VITALS][data][][HEIGHT (CM)][UUID]'  value='' )
+            input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][VITALS][data][][HEIGHT (CM)][concept][UUID]'  value='' )
+            input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][VITALS][data][][HEIGHT (CM)][concept][name]'  value='HEIGHT (CM)' )
+            input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][VITALS][data][][HEIGHT (CM)][response][category]'  value='NUMBER' )
+
+        - }
+
+        input(type='text' id='weight' field_type='number' tt_onLoad='$("clearButton").style.display = "inline";' min='0' max='100' absoluteMin='0' absoluteMax='250' units='kg'
+                validationRule='([0-9]+\\.[0-9])|Unknown$' validationMessage='You must enter a decimal between 0 and 9 (for example: 54<b>.6</b>)'
+                tt_pageStyleClass='Numeric NumbersWithUnknownAndDecimal' helpText='Weight (Kg)<span id="helper">Vitals</span>'
+                name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][VITALS][data][][WEIGHT (KG)][response][value]')
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][VITALS][data][][WEIGHT (KG)][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][VITALS][data][][WEIGHT (KG)][concept][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][VITALS][data][][WEIGHT (KG)][concept][name]'  value='WEIGHT (KG)' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][VITALS][data][][WEIGHT (KG)][response][category]'  value='NUMBER' )
+
+
+        input(type='text' id='oxygen' helpText='Oxygen saturation <span id="helper">Vitals</span>' field_type='number' tt_onLoad='timedEvent = setTimeout("calculateBP(4)", 100);' tt_onUnLoad='clearTimeout(timedEvent);' pos='8' min='85' max='100' condition='getSelected().match(/OXYGEN\\sSATURATION/i)' absoluteMin='0' absoluteMax='250' tt_pageStyleClass='Numeric NumbersWithUnknownAndDecimal' name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][VITALS][data][][BLOOD OXYGEN SATURATION][response][value]')
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][VITALS][data][][BLOOD OXYGEN SATURATION][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][VITALS][data][][BLOOD OXYGEN SATURATION][concept][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][VITALS][data][][BLOOD OXYGEN SATURATION][concept][name]'  value='BLOOD OXYGEN SATURATION' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][VITALS][data][][BLOOD OXYGEN SATURATION][response][category]'  value='NUMBER' )
+
+
+        input(type='text' name='name396146246324' disabled  id='summary' tt_onLoad='showSelectedConditions();__$("keyboard").style.display = "none";' optional='true' tt_pageStyleClass='NoControls')
+

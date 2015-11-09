@@ -1,0 +1,81 @@
+{
+    "Diabetes": {
+        "icon": "/images/diabetes.png",
+        "tasks": {
+            "Vitals": "http://localhost:3003/vitals/:id",
+            "Family History": "http://localhost:3003/family_history/:id",
+            "Social History": "http://localhost:3003/social history/:id",
+            "General Health": "http://localhost:3003/general_health/:id",
+            "Clinic Visit": "http://localhost:3003/clinic_visit/:id",
+            "HIV Status": "http://localhost:3003/hiv_status/:id",
+            "Lab Results": "http://localhost:3003/lab_results/:id",
+            "Complications": "http://localhost:3003/complications/:id",
+            "Treatment": "http://localhost:3003/treatment/:id",
+            "Outcomes": "http://localhost:3003/outcomes/:id"
+        },
+        "program" : "DIABETES PROGRAM",
+        "identifiers" : ["National id", "Diabetes Clinic Number"]
+    },
+    "ART": {
+        "icon": "/images/art.png",
+        "tasks": {
+            "HIV Clinic Consultation": "http://localhost:3003/hiv_clinic_consultation/:id",
+            "HIV Reception": "http://localhost:3003/reception/:id",
+            "Vitals": "http://localhost:3003/vitals/:id",
+            "HIV Staging": "http://localhost:3003/staging/:id",
+            "HIV Clinic Consultation": "http://localhost:3003/consultation/:id",
+            "Dispensing": "http://localhost:3003/dispensing/:id",
+            "Appointment": "http://localhost:3003/appointment/:id",
+            "Treatment": "http://localhost:3003/treatment/:id",
+            "ART Adherence": "http://localhost:3003/adherence/:id"
+        },
+        "program" : "HIV PROGRAM",
+        "identifiers" : ["National id", "ARV Number"]
+    },
+    "Asthma": {
+        "icon": "/images/asthma.png",
+        "tasks": {
+            "Medical History": "http://localhost:3003/medical_history/:id",
+            "Family History History": "http://localhost:3003/family_history/:id",
+            "Social History": "http://localhost:3003/social_history/:id",
+            "HIV Status": "http://localhost:3003/hiv_status/:id",
+            "Asthma Examination": "http://localhost:3003/asthma_examination/:id",
+            "Treatment": "http://localhost:3003/treatment/:id",
+            "Appointment": "http://localhost:3003/appointment/:id",
+            "Vitals": "http://localhost:3003/vitals/:id"
+        },
+        "program" : "ASTHMA PROGRAM",
+        "identifiers" : ["National id", "Asthma Clinic Number"]
+    },
+    "Epilepsy": {
+        "icon": "/images/epilepsy.png",
+        "tasks": {
+            "Vitals": "http://localhost:3003/vitals/:id",
+            "Family History": "http://localhost:3003/family_history/:id",
+            "Social History": "http://localhost:3003/social history/:id",
+            "General Health": "http://localhost:3003/general_health/:id",
+            "Clinic Visit": "http://localhost:3003/clinic_visit/:id",
+            "Diagnosis": "http://localhost:3003/diagnosis/:id",
+            "Outcomes": "http://localhost:3003/outcomes/:id"
+        },
+        "program" : "EPILEPSY PROGRAM",
+        "identifiers" : ["National id", "Epilepsy Clinic Number"]
+    },
+    "Hypertension": {
+        "icon": "/images/hypertension.png",
+        "tasks": {
+            "Vitals": "http://localhost:3003/vitals/:id",
+            "Family History": "http://localhost:3003/family_history/:id",
+            "Social History": "http://localhost:3003/social history/:id",
+            "General Health": "http://localhost:3003/general_health/:id",
+            "Clinic Visit": "http://localhost:3003/clinic_visit/:id",
+            "HIV Status": "http://localhost:3003/hiv_status/:id",
+            "Lab Results": "http://localhost:3003/lab_results/:id",
+            "Complications": "http://localhost:3003/complications/:id",
+            "Treatment": "http://localhost:3003/treatment/:id",
+            "Outcomes": "http://localhost:3003/outcomes/:id"
+        },
+        "program" : "HYPERTENSION PROGRAM",
+        "identifiers" : ["National id", "HTN Clinic Number"]
+    }
+}

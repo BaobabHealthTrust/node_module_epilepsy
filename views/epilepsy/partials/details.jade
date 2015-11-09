@@ -1,0 +1,12 @@
+div(id="patient_name")
+    = person.data.names[0]["First Name"] + " " + person.data.names[0]["Family Name"]
+div(id="patient_gender")
+    - var gender = {F: "Female", M: "Male"};
+    = gender[person.data.gender]
+div(id="patient_card")
+    div(value= person.data.age)
+        | Age
+    div(value= (person.data.identifiers["Epilepsy Number"] ? (person.data.identifiers["Epilepsy Number"].identifier ? person.data.identifiers["Epilepsy Number"].identifier : "") : ""))
+        | DC Number
+    div(value= (current_updated_outcome ? current_updated_outcome : ""))
+        | Outcome

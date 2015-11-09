@@ -1,0 +1,38 @@
+//
+   Created by chimwemwe on 11/9/15.
+
+extends layout
+
+block mainContent
+
+    form(id='form' action='/epilepsy/encounter/create/#{id}' method='post')
+
+        input(type='hidden' name='data[UUID]' value='#{uuid}')
+
+        input(type='hidden' name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][UPDATE OUTCOME][UUID]' value='#{encounter_uuid}')
+
+        select(id='1.1.1' helpText='New Outcome' tt_onLoad='showCategory("Update Outcome");' tt_pageStyleClass='longSelectList noKeyboard'
+                name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][UPDATE OUTCOME][data][][OUTCOME][response][value]')
+            option
+            option
+                | Patient Transferred Out
+            option
+                | Patient Died
+            option
+                | Discharged
+            option
+                | On treatment
+            option
+                | Defaulted
+            option
+                | Treatment Stopped
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][UPDATE OUTCOME][data][][OUTCOME][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][UPDATE OUTCOME][data][][OUTCOME][concept][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][UPDATE OUTCOME][data][][OUTCOME][concept][name]'  value='OUTCOME' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][UPDATE OUTCOME][data][][OUTCOME][response][category]'  value='TEXT' )
+
+        input(type='text' id='location' helpText='Select Location transferred to:' condition='$("1.1.1").value.toLowerCase() == "patient transferred out"' ajaxURL='/location/locations?search_string=' name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][UPDATE OUTCOME][data][][TRANSFERRED TO][response][value]')
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][UPDATE OUTCOME][data][][TRANSFERRED TO][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][UPDATE OUTCOME][data][][TRANSFERRED TO][concept][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][UPDATE OUTCOME][data][][TRANSFERRED TO][concept][name]'  value='TRANSFERRED TO' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][UPDATE OUTCOME][data][][TRANSFERRED TO][response][category]'  value='TEXT' )

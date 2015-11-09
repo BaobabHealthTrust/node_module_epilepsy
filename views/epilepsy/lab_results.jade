@@ -1,0 +1,70 @@
+//
+   Created by chimwemwe on 11/7/15.
+
+extends layout
+
+block mainContent
+
+    script(src="/epilepsy/javascripts/lab_results.js")
+
+    form(id='form' action='/epilepsy/encounter/create/#{id}' method='post')
+
+        input(type='hidden' name='data[UUID]' value='#{uuid}')
+
+        input(type='hidden' name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][LAB RESULTS][UUID]' value='#{encounter_uuid}')
+
+        select(name='name128519323588' disabled  id='seizure_focal' helpText='Is the patient in active seizure?' tt_onLoad='showCategory("Lab Results");' allowFreeText='false')
+            option
+            option
+                | Yes
+            option
+                | No
+
+        select(id='test_types' field_type='text' helpText='Select the type of blood sugar test taken:' tt_pageStyleClass='MultiSelectList' optional='true' condition='$("seizure_focal").value.toLowerCase() == "yes"' tt_onLoad='showCategory("Lab Results");' name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][LAB RESULTS][data][][SELECT THE TYPE OF BLOOD SUGAR TEST TAKEN:][response][value]')
+            option
+            option
+                | FASTING BLOOD SUGAR
+            option
+                | RANDOM BLOOD SUGAR
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][LAB RESULTS][data][][SELECT THE TYPE OF BLOOD SUGAR TEST TAKEN:][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][LAB RESULTS][data][][SELECT THE TYPE OF BLOOD SUGAR TEST TAKEN:][concept][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][LAB RESULTS][data][][SELECT THE TYPE OF BLOOD SUGAR TEST TAKEN:][concept][name]'  value='SELECT THE TYPE OF BLOOD SUGAR TEST TAKEN:' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][LAB RESULTS][data][][SELECT THE TYPE OF BLOOD SUGAR TEST TAKEN:][response][category]'  value='TEXT' )
+
+        select(id='fbs_unit' field_type='text' tt_onload='$("infoBar"+tstCurrentPage).innerHTML = " Fasting Blood Sugar";__$("nextButton").style.display = "none";'
+                condition='getSelected().match(/FASTING\\sBLOOD\\sSUGAR/i) && $("seizure_focal").value.toLowerCase() == "yes"' tt_requireNextClick='false'
+                helpText='Select blood sugar units of measure' name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][LAB RESULTS][data][][UNITS][response][value]')
+            option
+            option
+                | mmol/l
+            option
+                | mg/dl
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][LAB RESULTS][data][][UNITS][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][LAB RESULTS][data][][UNITS][concept][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][LAB RESULTS][data][][UNITS][concept][name]'  value='UNITS' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][LAB RESULTS][data][][UNITS][response][category]'  value='' )
+
+        input(type='text' id='fbs_value' field_type='number' helpText='Fasting Blood Sugar Value' condition='getSelected().match(/FASTING\\sBLOOD\\sSUGAR/i) && $("seizure_focal").value.toLowerCase() == "yes"' min='50' max='500' validationRule='([0-9]+(\\.)*[0-9]*)|Unknown$' validationMessage='You must enter a decimal between 0 and 9 (for example: 36<b>.6</b>)' tt_pageStyleClass='Numeric NumbersOnlyWithDecimal' tt_onload='resetPageAttributes("touchscreenInput"+tstCurrentPage, "fbs");__$("nextButton").style.display = "block"; showCategory("Lab Results");' name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][LAB RESULTS][data][][FASTING BLOOD SUGAR VALUE][response][value]')
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][LAB RESULTS][data][][FASTING BLOOD SUGAR VALUE][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][LAB RESULTS][data][][FASTING BLOOD SUGAR VALUE][concept][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][LAB RESULTS][data][][FASTING BLOOD SUGAR VALUE][concept][name]' value='FASTING BLOOD SUGAR VALUE' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][LAB RESULTS][data][][FASTING BLOOD SUGAR VALUE][response][category]'  value='NUMBER' )
+
+        select(id='rbs_unit' field_type='text' tt_onload='$("infoBar"+tstCurrentPage).innerHTML = " Random Blood Sugar";__$("nextButton").style.display = "none";'
+                condition='getSelected().match(/RANDOM\\sBLOOD\\sSUGAR/i) && $("seizure_focal").value.toLowerCase() == "yes"' tt_requireNextClick='false'
+                helpText='Select blood sugar units of measure' name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][LAB RESULTS][data][][UNITS][response][value]')
+            option
+            option
+                | mmol/l
+            option
+                | mg/dl
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][LAB RESULTS][data][][UNITS][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][LAB RESULTS][data][][UNITS][concept][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][LAB RESULTS][data][][UNITS][concept][name]'  value='UNITS' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][LAB RESULTS][data][][UNITS][response][category]'  value='' )
+
+        input(type='text' id='rbs_value' field_type='number' helpText='Random Blood Sugar Value' condition='getSelected().match(/RANDOM\\sBLOOD\\sSUGAR/i) && $("seizure_focal").value.toLowerCase() == "yes"' min='50' max='500' validationRule='([0-9]+(\\.)*[0-9]*)|Unknown$' validationMessage='You must enter a decimal between 0 and 9 (for example: 36<b>.6</b>)' tt_pageStyleClass='Numeric NumbersOnlyWithDecimal' tt_onload='resetPageAttributes("touchscreenInput"+tstCurrentPage, "fbs");__$("nextButton").style.display = "block";' name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][LAB RESULTS][data][][RANDOM BLOOD SUGAR VALUE][response][value]')
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][LAB RESULTS][data][][RANDOM BLOOD SUGAR VALUE][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][LAB RESULTS][data][][RANDOM BLOOD SUGAR VALUE][concept][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][LAB RESULTS][data][][RANDOM BLOOD SUGAR VALUE][concept][name]'  value='RANDOM BLOOD SUGAR VALUE' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][LAB RESULTS][data][][RANDOM BLOOD SUGAR VALUE][response][category]'  value='NUMBER' )

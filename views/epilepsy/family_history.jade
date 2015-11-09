@@ -1,0 +1,93 @@
+//
+   Created by chimwemwe on 11/6/15.
+
+extends layout
+
+block mainContent
+
+    style.
+        .summary {
+            font-size: 27px;
+            padding-left: 15px;
+        }
+
+        .data {
+            color: black;
+            font-size: 25px;
+        }
+
+    script(src="/epilepsy/javascripts/family_history.js")
+
+    form(id='form' action='/epilepsy/encounter/create/#{id}' method='post')
+
+        input(type='hidden' name='data[UUID]' value='#{uuid}')
+
+        input(type='hidden' name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][FAMILY MEDICAL HISTORY][UUID]' value='#{encounter_uuid}')
+
+        input(type='text' id='family_members' helpText='Number of family members including the deceased? '
+                field_type='number' pos='1' min='1' max='20' tt_pageStyleClass='Numeric NumbersWithUnknown' tt_onUnLoad='setLimit()' tt_onLoad='showCategory("Family History")'
+                name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][FAMILY MEDICAL HISTORY][data][][NUMBER OF PEOPLE IN HOUSEHOLD EXCLUDING PATIENT][response][value]')
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][FAMILY MEDICAL HISTORY][data][][NUMBER OF PEOPLE IN HOUSEHOLD EXCLUDING PATIENT][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][FAMILY MEDICAL HISTORY][data][][NUMBER OF PEOPLE IN HOUSEHOLD EXCLUDING PATIENT][concept][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][FAMILY MEDICAL HISTORY][data][][NUMBER OF PEOPLE IN HOUSEHOLD EXCLUDING PATIENT][concept][name]'  value='NUMBER OF PEOPLE IN HOUSEHOLD EXCLUDING PATIENT' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][FAMILY MEDICAL HISTORY][data][][NUMBER OF PEOPLE IN HOUSEHOLD EXCLUDING PATIENT][response][category]'  value='NUMBER' )
+
+        input(type='text' id='position' helpText='Patient birth order position?' field_type='number' tt_onLoad='showCategory("Family History")'
+                pos='1' absoluteMin='1' min='1' max='20' validationCode='limitNumber(this)' validationMessage='Birth position can not be greater than total number of people'
+                tt_pageStyleClass='Numeric NumbersWithUnknown' name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][FAMILY MEDICAL HISTORY][data][][POSITION][response][value]')
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][FAMILY MEDICAL HISTORY][data][][POSITION][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][FAMILY MEDICAL HISTORY][data][][POSITION][concept][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][FAMILY MEDICAL HISTORY][data][][POSITION][concept][name]'  value='POSITION' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][FAMILY MEDICAL HISTORY][data][][POSITION][response][category]'  value='NUMBER' )
+
+        select(id='epilepsy' helpText='Family History of epilepsy?' tt_requireNextClick='false' tt_onLoad='showCategory("Family History")'
+                name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][FAMILY MEDICAL HISTORY][data][][FAMILY HISTORY OF EPILEPSY?][response][value]')
+            option
+            option
+                | No
+            option
+                | Yes
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][FAMILY MEDICAL HISTORY][data][][FAMILY HISTORY OF EPILEPSY?][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][FAMILY MEDICAL HISTORY][data][][FAMILY HISTORY OF EPILEPSY?][concept][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][FAMILY MEDICAL HISTORY][data][][FAMILY HISTORY OF EPILEPSY?][concept][name]'  value='FAMILY HISTORY OF EPILEPSY?' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][FAMILY MEDICAL HISTORY][data][][FAMILY HISTORY OF EPILEPSY?][response][category]'  value='TEXT' )
+
+        select(id='convulsion' helpText='Family History of Convulsions?' tt_requireNextClick='false' tt_onLoad='showCategory("Family History")'
+                name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][FAMILY MEDICAL HISTORY][data][][FAMILY HISTORY OF CONVULSIONS?][response][value]')
+            option
+            option
+                | No
+            option
+                | Yes
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][FAMILY MEDICAL HISTORY][data][][FAMILY HISTORY OF CONVULSIONS?][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][FAMILY MEDICAL HISTORY][data][][FAMILY HISTORY OF CONVULSIONS?][concept][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][FAMILY MEDICAL HISTORY][data][][FAMILY HISTORY OF CONVULSIONS?][concept][name]'  value='FAMILY HISTORY OF CONVULSIONS?' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][FAMILY MEDICAL HISTORY][data][][FAMILY HISTORY OF CONVULSIONS?][response][category]'  value='TEXT' )
+
+
+        select(id='seizures' helpText='Family History of Seizures?' tt_requireNextClick='false' tt_onLoad='showCategory("Family History")'
+                name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][FAMILY MEDICAL HISTORY][data][][FAMILY HISTORY OF SEIZURES?][response][value]')
+            option
+            option
+                | No
+            option
+                | Yes
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][FAMILY MEDICAL HISTORY][data][][FAMILY HISTORY OF SEIZURES?][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][FAMILY MEDICAL HISTORY][data][][FAMILY HISTORY OF SEIZURES?][concept][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][FAMILY MEDICAL HISTORY][data][][FAMILY HISTORY OF SEIZURES?][concept][name]'  value='FAMILY HISTORY OF SEIZURES?' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][FAMILY MEDICAL HISTORY][data][][FAMILY HISTORY OF SEIZURES?][response][category]'  value='TEXT' )
+
+
+        select(id='mental_disorder' helpText='Family History of Mental Disorders?' tt_requireNextClick='false' tt_onLoad='showCategory("Family History")'
+                name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][FAMILY MEDICAL HISTORY][data][][FAMILY HISTORY OF MENTAL DISORDERS?][response][value]')
+            option
+            option
+                | No
+            option
+                | Yes
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][FAMILY MEDICAL HISTORY][data][][FAMILY HISTORY OF MENTAL DISORDERS?][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][FAMILY MEDICAL HISTORY][data][][FAMILY HISTORY OF MENTAL DISORDERS?][concept][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][FAMILY MEDICAL HISTORY][data][][FAMILY HISTORY OF MENTAL DISORDERS?][concept][name]'  value='FAMILY HISTORY OF MENTAL DISORDERS?' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][FAMILY MEDICAL HISTORY][data][][FAMILY HISTORY OF MENTAL DISORDERS?][response][category]'  value='TEXT' )
+
+        input(type='text' name='name77773211448' disabled  id='summary' tt_onLoad='showSelectedConditions();__$("keyboard").style.display = "none";' optional='true' tt_pageStyleClass='NoControls')

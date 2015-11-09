@@ -1,0 +1,52 @@
+extends layout
+
+block mainContent
+    div(id="dashboard")
+        include partials/details
+    div(id="project_name")
+        | Epilepsy
+    // div(id="custom_banner" path="/graph/#{id}?uuid=#{person.data.UUID}")
+
+    select(id="links")
+        option(value="/epilepsy/supplementary_questions/#{id}?uuid=#{person.data.UUID}")
+            | Enroll in Program
+        option(value="/epilepsy/vitals/#{id}?uuid=#{person.data.UUID}")
+            | Vitals
+        option(value="/epilepsy/family_history/#{id}?uuid=#{person.data.UUID}")
+            | Family History
+        option(value="/epilepsy/social_history/#{id}?uuid=#{person.data.UUID}")
+            | Social History
+        option(value="/epilepsy/medical_history/#{id}?uuid=#{person.data.UUID}")
+            | Medical History
+        option(value="/epilepsy/general_health/#{id}?uuid=#{person.data.UUID}")
+            | General Health
+        option(value="/epilepsy/lab_results/#{id}?uuid=#{person.data.UUID}")
+            | Lab Results
+        option(value="/epilepsy/clinic_visit/#{id}?uuid=#{person.data.UUID}")
+            | Clinic Visit
+        option(value="/epilepsy/treatment/#{id}?uuid=#{person.data.UUID}")
+            | Treatment
+        option(value="/epilepsy/outcome/#{id}?uuid=#{person.data.UUID}")
+            | Outcome
+
+    select(id="tabs")
+        option(value="/epilepsy/current_encounters/#{id}?uuid=#{person.data.UUID}")
+            | Visit
+        option(value="/epilepsy/epilepsy_treatments/#{id}?uuid=#{person.data.UUID}")
+            | Current Medication
+        option(value="/epilepsy/recent_screen_complications/#{id}?uuid=#{person.data.UUID}" selectedTab="#{(highlight && highlight == true ? true : false)}")
+            | Recent Complications
+        option(value="/epilepsy/important_medical_history/#{id}?uuid=#{person.data.UUID}")
+            | Medical History
+        option(value="/epilepsy/hiv/#{id}?uuid=#{person.data.UUID}" selectedTab="#{(hivHighlight && hivHighlight == true ? true : false)}")
+            | HIV Status
+
+    select(id="navigation_links")
+        option(link="/patient/#{id}?uuid=#{person.data.UUID}")
+            | Cancel
+        option(link="/patient/#{id}?uuid=#{person.data.UUID}")
+            | Finish
+        option(link="/edit_demographics/#{id}?uuid=#{person.data.UUID}")
+            | Edit Demographics
+        option(link="/set_date/#{id}?uuid=#{person.data.UUID}")
+            | Set Date

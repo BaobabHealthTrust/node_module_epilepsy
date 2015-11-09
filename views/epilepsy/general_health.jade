@@ -1,0 +1,152 @@
+//
+   Created by chimwemwe on 11/7/15.
+
+extends layout
+
+block mainContent
+
+    style.
+        .summary {
+            font-size: 27px;
+            padding-left: 15px;
+        }
+            .data {
+            color: black;
+            font-size: 25px;
+        }
+        #tt_page_treatment_received #viewport {
+            height: 500px;
+        }
+        ol{
+            list-style-type: none;
+        }
+        #tt_page_any_drug_allergies #viewport {
+            height: 200px;
+        }
+        #tt_page_patient_has_any_of_the_following #viewport {
+            height: 550px;
+        }
+
+        #tt_page_patient_has_any_of_the_following .inputFrameClass {
+            height: 600px;
+        }
+
+        #tt_page_any_drug_allergies #viewport {
+            height: 550px;
+        }
+
+        #tt_page_any_drug_allergies .inputFrameClass {
+            height: 600px;
+        }
+
+        #tt_page_summary  .inputFrameClass {
+            height: 600px;
+        }
+
+        #tt_page_summary  #viewport {
+            height: 600px;
+        }
+        th { text-align: center;
+            vertical-align: middle;
+            background-color: #9250DE;
+            color: white;
+            height: 10%;
+            border-radius: 20px ;
+        }
+        ul {
+            height: 500px ! important;
+        }
+    script(src="/epilepsy/javascripts/general_health.js")
+
+    form(id='form' action='/epilepsy/encounter/create/#{id}' method='post')
+
+        input(type='hidden' name='data[UUID]' value='#{uuid}')
+
+        input(type='hidden' name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][GENERAL HEALTH][UUID]' value='#{encounter_uuid}')
+
+        input(type='hidden' id='refer_to_clinician' name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][GENERAL HEALTH][data][][REFER TO CLINICIAN][response][value]')
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][GENERAL HEALTH][data][][REFER TO CLINICIAN][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][GENERAL HEALTH][data][][REFER TO CLINICIAN][concept][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][GENERAL HEALTH][data][][REFER TO CLINICIAN][concept][name]'  value='REFER TO CLINICIAN' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][GENERAL HEALTH][data][][REFER TO CLINICIAN][response][category]'  value='TEXT' )
+
+        select(id='choice' helpText='Patient has any of the following' multiple='multiple' tt_pageStyleClass='MultiSelectList' optional='true' tt_onLoad='clearTreatment(); showCategory("General Health");' field_type='text' name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][GENERAL HEALTH][data][][PATIENT HAS THE FOLLOWING:][response][value]')
+            option
+            option
+                | Heart disease
+            option
+                | Stroke
+            option
+                | TIA
+            option
+                | Diabetes
+            option
+                | Kidney Disease
+            option
+                | Head Injury
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][GENERAL HEALTH][data][][PATIENT HAS THE FOLLOWING:][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][GENERAL HEALTH][data][][PATIENT HAS THE FOLLOWING:][concept][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][GENERAL HEALTH][data][][PATIENT HAS THE FOLLOWING:][concept][name]'  value='PATIENT HAS THE FOLLOWING:' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][GENERAL HEALTH][data][][PATIENT HAS THE FOLLOWING:][response][category]'  value='TEXT' )
+
+
+        select(id='regimen_concept_id' optional='true' multiple='multiple' helpText='Treatment Received' condition='$("choice").value.length > 0' tt_onLoad='showCategory("General Health");' tt_pageStyleClass='MultiSelectList' name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][GENERAL HEALTH][data][][TREATMENT RECEIVED][response][value]')
+            option
+            - for(var i = 0; i < treatments.length; i++) {
+                option
+                    = treatments[i]
+            - }
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][GENERAL HEALTH][data][][TREATMENT RECEIVED][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][GENERAL HEALTH][data][][TREATMENT RECEIVED][concept][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][GENERAL HEALTH][data][][TREATMENT RECEIVED][concept][name]'  value='TREATMENT RECEIVED' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][GENERAL HEALTH][data][][TREATMENT RECEIVED][response][category]'  value='TEXT' )
+
+
+        select(id='drug_allergy' condition='$("choice").value.length > 0' helpText='Any drug allergies' tt_onLoad='showCategory("General Health");' name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][GENERAL HEALTH][data][][ANY DRUG ALLERGIES?][response][value]')
+            option
+            option
+                | Yes
+            option
+                | No
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][GENERAL HEALTH][data][][ANY DRUG ALLERGIES?][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][GENERAL HEALTH][data][][ANY DRUG ALLERGIES?][concept][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][GENERAL HEALTH][data][][ANY DRUG ALLERGIES?][concept][name]'  value='ANY DRUG ALLERGIES?' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][GENERAL HEALTH][data][][ANY DRUG ALLERGIES?][response][category]'  value='TEXT' )
+
+
+        select(id='1.1.13' helpText='Complications during birth of patient?' multiple='multiple' optional='true' name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][GENERAL HEALTH][data][][COMPLICATIONS DURING BIRTH OF PATIENT?][response][value]')
+            option
+            option
+                | Development
+            option
+                | Neonatal
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][GENERAL HEALTH][data][][COMPLICATIONS DURING BIRTH OF PATIENT?][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][GENERAL HEALTH][data][][COMPLICATIONS DURING BIRTH OF PATIENT?][concept][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][GENERAL HEALTH][data][][COMPLICATIONS DURING BIRTH OF PATIENT?][concept][name]'  value='COMPLICATIONS DURING BIRTH OF PATIENT?' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][GENERAL HEALTH][data][][COMPLICATIONS DURING BIRTH OF PATIENT?][response][category]'  value='TEXT' )
+
+
+        select(id='epilepsy' optional='true' multiple='multiple' tt_pageStyleClass='MultiSelectList' helpText='Effects of Epilepsy experienced on the following:' tt_onLoad='showCategory("General Health");' name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][GENERAL HEALTH][data][][EFFECTS OF EPILEPSY EXPERIENCED ON THE FOLLOWING][response][value]')
+            option
+            option
+                | Effects on occupation
+            option
+                | School
+            option
+                | Marital status
+            option
+                | Overprotection
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][GENERAL HEALTH][data][][EFFECTS OF EPILEPSY EXPERIENCED ON THE FOLLOWING][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][GENERAL HEALTH][data][][EFFECTS OF EPILEPSY EXPERIENCED ON THE FOLLOWING][concept][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][GENERAL HEALTH][data][][EFFECTS OF EPILEPSY EXPERIENCED ON THE FOLLOWING][concept][name]'  value='EFFECTS OF EPILEPSY EXPERIENCED ON THE FOLLOWING' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][GENERAL HEALTH][data][][EFFECTS OF EPILEPSY EXPERIENCED ON THE FOLLOWING][response][category]'  value='TEXT' )
+
+
+        textarea(id='explanation' field_type='textarea' helpText='Explanation of effects experienced' condition='$("epilepsy").value.length > 0' tt_onLoad='showCategory("General Health");' name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][GENERAL HEALTH][data][][EXPLANATION OF EFFECTS EXPERIENCED][response][value]')
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][GENERAL HEALTH][data][][EXPLANATION OF EFFECTS EXPERIENCED][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][GENERAL HEALTH][data][][EXPLANATION OF EFFECTS EXPERIENCED][concept][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][GENERAL HEALTH][data][][EXPLANATION OF EFFECTS EXPERIENCED][concept][name]'  value='EXPLANATION OF EFFECTS EXPERIENCED' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][GENERAL HEALTH][data][][EXPLANATION OF EFFECTS EXPERIENCED][response][category]'  value='TEXT' )
+
+
+        input(type='text' name='name907277299896' disabled  id='summary' tt_onLoad='showSelectedConditions();__$("keyboard").style.display = "none"; showCategory("Summary");' optional='true' tt_pageStyleClass='NoControls')

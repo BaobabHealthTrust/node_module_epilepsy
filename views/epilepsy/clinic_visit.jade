@@ -1,0 +1,115 @@
+//
+   Created by chimwemwe on 11/7/15.
+
+extends layout
+
+block mainContent
+
+    script(src="/epilepsy/javascripts/clinic_visit.js")
+
+    form(id='form' action='/epilepsy/encounter/create/#{id}' method='post')
+
+        input(type='hidden' name='data[UUID]' value='#{uuid}')
+
+        input(type='hidden' name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][CLINIC VISIT][UUID]' value='#{encounter_uuid}')
+
+        select(id='patient_type' helpText='The patient is a:' tt_onload='showCategory("Clinic Visit");' name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][CLINIC VISIT][data][][THE PATIENT IS A:][response][value]')
+            option
+            option
+                | NEW PATIENT
+            option
+                | TRANSFER IN
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][CLINIC VISIT][data][][THE PATIENT IS A:][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][CLINIC VISIT][data][][THE PATIENT IS A:][concept][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][CLINIC VISIT][data][][THE PATIENT IS A:][concept][name]'  value='THE PATIENT IS A:' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][CLINIC VISIT][data][][THE PATIENT IS A:][response][category]'  value='TEXT' )
+
+
+        select(id='location' helpText='Transferred from' condition='$("patient_type").value == "TRANSFER IN"' name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][CLINIC VISIT][data][][TRANSFERRED FROM][response][value]')
+            option
+            option
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][CLINIC VISIT][data][][TRANSFERRED FROM][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][CLINIC VISIT][data][][TRANSFERRED FROM][concept][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][CLINIC VISIT][data][][TRANSFERRED FROM][concept][name]'  value='TRANSFERRED FROM' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][CLINIC VISIT][data][][TRANSFERRED FROM][response][category]'  value='TEXT' )
+
+
+        select(id='1.1.1' helpText='Have you ever been diagnosed with TB?' tt_requireNextClick='false' name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][CLINIC VISIT][data][][HAVE YOU EVER HAD TB?][response][value]')
+            option
+            option
+                | No
+            option
+                | Yes
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][CLINIC VISIT][data][][HAVE YOU EVER HAD TB?][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][CLINIC VISIT][data][][HAVE YOU EVER HAD TB?][concept][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][CLINIC VISIT][data][][HAVE YOU EVER HAD TB?][concept][name]'  value='HAVE YOU EVER HAD TB?' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][CLINIC VISIT][data][][HAVE YOU EVER HAD TB?][response][category]'  value='TEXT' )
+
+
+        select(id='1.1.1' tt_requireNextClick='false' helpText='Have you ever been diagnosed with TB since your LAST clinic visit?' name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][CLINIC VISIT][data][][HAVE YOU BEEN DIAGNOSED WITH TB SINCE YOUR LAST CLINIC VISIT?][response][value]')
+            option
+            option
+                | No
+            option
+                | Yes
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][CLINIC VISIT][data][][HAVE YOU BEEN DIAGNOSED WITH TB SINCE YOUR LAST CLINIC VISIT?][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][CLINIC VISIT][data][][HAVE YOU BEEN DIAGNOSED WITH TB SINCE YOUR LAST CLINIC VISIT?][concept][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][CLINIC VISIT][data][][HAVE YOU BEEN DIAGNOSED WITH TB SINCE YOUR LAST CLINIC VISIT?][concept][name]'  value='HAVE YOU BEEN DIAGNOSED WITH TB SINCE YOUR LAST CLINIC VISIT?' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][CLINIC VISIT][data][][HAVE YOU BEEN DIAGNOSED WITH TB SINCE YOUR LAST CLINIC VISIT?][response][category]'  value='TEXT' )
+
+
+        select(id='year_of_tb_diagnosis' multiple='multiple' condition='$("1.1.1").value.match(/^yes$/i);' tt_pageStyleClass='longSelectList' absoluteMin='1950' min='1940' absoluteMax='#{(new Date()).getFullYear()}' helpText='Year(s) of TB Diagnosis' tt_onLoad='showCategory("Clinic Visit");' name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][CLINIC VISIT][data][][YEAR(S) OF TB DIAGNOSIS][response][value]')
+            option
+            option
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][CLINIC VISIT][data][][YEAR(S) OF TB DIAGNOSIS][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][CLINIC VISIT][data][][YEAR(S) OF TB DIAGNOSIS][concept][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][CLINIC VISIT][data][][YEAR(S) OF TB DIAGNOSIS][concept][name]'  value='YEAR(S) OF TB DIAGNOSIS' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][CLINIC VISIT][data][][YEAR(S) OF TB DIAGNOSIS][response][category]'  value='TEXT' )
+
+
+        select(id='1.1.3' helpText='Is the patient diabetic?' tt_requireNextClick='false' name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][CLINIC VISIT][data][][IS THE PATIENT DIABETIC?][response][value]')
+            option
+            option
+                | No
+            option
+                | Yes
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][CLINIC VISIT][data][][IS THE PATIENT DIABETIC?][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][CLINIC VISIT][data][][IS THE PATIENT DIABETIC?][concept][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][CLINIC VISIT][data][][IS THE PATIENT DIABETIC?][concept][name]'  value='IS THE PATIENT DIABETIC?' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][CLINIC VISIT][data][][IS THE PATIENT DIABETIC?][response][category]'  value='TEXT' )
+
+
+        select(id='year_of_diabetes_diagnosis' multiple='multiple' condition='$("1.1.3").value.match(/^yes$/i);' tt_pageStyleClass='longSelectList' helpText='Year(s) of Diabetes Diagnosis' tt_onLoad='showCategory("Clinic Visit");' name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][CLINIC VISIT][data][][YEAR(S) OF DIABETES DIAGNOSIS][response][value]')
+            option
+            option
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][CLINIC VISIT][data][][YEAR(S) OF DIABETES DIAGNOSIS][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][CLINIC VISIT][data][][YEAR(S) OF DIABETES DIAGNOSIS][concept][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][CLINIC VISIT][data][][YEAR(S) OF DIABETES DIAGNOSIS][concept][name]'  value='YEAR(S) OF DIABETES DIAGNOSIS' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][CLINIC VISIT][data][][YEAR(S) OF DIABETES DIAGNOSIS][response][category]'  value='TEXT' )
+
+
+        select(id='1.1.5' tt_onLoad='showCategory("Clinic Visit");' helpText='Is patient pregnant?' name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][CLINIC VISIT][data][][IS PATIENT PREGNANT?][response][value]')
+            option
+            option
+                | No
+            option
+                | Yes
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][CLINIC VISIT][data][][IS PATIENT PREGNANT?][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][CLINIC VISIT][data][][IS PATIENT PREGNANT?][concept][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][CLINIC VISIT][data][][IS PATIENT PREGNANT?][concept][name]'  value='IS PATIENT PREGNANT?' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][CLINIC VISIT][data][][IS PATIENT PREGNANT?][response][category]'  value='TEXT' )
+
+
+        select(id='1.1.6' helpText='Is Patient breastfeeding' tt_requireNextClick='false' tt_onLoad='showCategory("Clinic Visit");' name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][CLINIC VISIT][data][][IS PATIENT BREAST FEEDING?][response][value]')
+            option
+            option
+                | No
+            option
+                | Yes
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][CLINIC VISIT][data][][IS PATIENT BREAST FEEDING?][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][CLINIC VISIT][data][][IS PATIENT BREAST FEEDING?][concept][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][CLINIC VISIT][data][][IS PATIENT BREAST FEEDING?][concept][name]'  value='IS PATIENT BREAST FEEDING?' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][CLINIC VISIT][data][][IS PATIENT BREAST FEEDING?][response][category]'  value='TEXT' )
+
+
+        input(type='text' name='name913877448080' disabled  id='summary' tt_onLoad='showSelectedConditions();__$("keyboard").style.display = "none";' optional='true' tt_pageStyleClass='NoControls')

@@ -1,0 +1,142 @@
+//
+   Created by chimwemwe on 11/7/15.
+
+extends layout
+
+block mainContent
+
+    style.
+        .summary {
+            font-size: 27px;
+            padding-left: 15px;
+        }
+            .data {
+            color: black;
+            font-size: 25px;
+        }
+
+    script(src="/epilepsy/javascripts/medical_history.js")
+
+    form(id='form' action='/epilepsy/encounter/create/#{id}' method='post')
+
+        input(type='hidden' name='data[UUID]' value='#{uuid}')
+
+        input(type='hidden' name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][MEDICAL HISTORY][UUID]' value='#{encounter_uuid}')
+
+        select(id='cysticercosis' helpText='Ever had cysticercosis?' tt_requireNextClick='false' tt_onLoad='showCategory("Medical History");' name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][MEDICAL HISTORY][data][][EVER HAD CYSTICERCOSIS?][response][value]')
+            option
+            option
+                | No
+            option
+                | Yes
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][MEDICAL HISTORY][data][][EVER HAD CYSTICERCOSIS?][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][MEDICAL HISTORY][data][][EVER HAD CYSTICERCOSIS?][concept][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][MEDICAL HISTORY][data][][EVER HAD CYSTICERCOSIS?][concept][name]'  value='EVER HAD CYSTICERCOSIS?' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][MEDICAL HISTORY][data][][EVER HAD CYSTICERCOSIS?][response][category]'  value='TEXT' )
+
+        select(id='head_injury' helpText='Ever had a previous head trauma?' tt_requireNextClick='false' tt_onLoad='showCategory("Medical History");' name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][MEDICAL HISTORY][data][][EVER HAD A PREVIOUS HEAD TRAUMA?][response][value]')
+            option
+            option
+                | No
+            option
+                | Yes
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][MEDICAL HISTORY][data][][EVER HAD A PREVIOUS HEAD TRAUMA?][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][MEDICAL HISTORY][data][][EVER HAD A PREVIOUS HEAD TRAUMA?][concept][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][MEDICAL HISTORY][data][][EVER HAD A PREVIOUS HEAD TRAUMA?][concept][name]'  value='EVER HAD A PREVIOUS HEAD TRAUMA?' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][MEDICAL HISTORY][data][][EVER HAD A PREVIOUS HEAD TRAUMA?][response][category]'  value='TEXT' )
+
+        select(id='meningitis' helpText='Ever had meningitis?' tt_requireNextClick='false' tt_onLoad='showCategory("Medical History");' name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][MEDICAL HISTORY][data][][EVER HAD MENINGITIS?][response][value]')
+            option
+            option
+                | No
+            option
+                | Yes
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][MEDICAL HISTORY][data][][EVER HAD MENINGITIS?][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][MEDICAL HISTORY][data][][EVER HAD MENINGITIS?][concept][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][MEDICAL HISTORY][data][][EVER HAD MENINGITIS?][concept][name]'  value='EVER HAD MENINGITIS?' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][MEDICAL HISTORY][data][][EVER HAD MENINGITIS?][response][category]'  value='TEXT' )
+
+        select(id='malaria' helpText='Ever had cerebral malaria?' tt_requireNextClick='false' tt_onLoad='showCategory("Medical History");' name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][MEDICAL HISTORY][data][][EVER HAD CEREBRAL MALARIA?][response][value]')
+            option
+            option
+                | No
+            option
+                | Yes
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][MEDICAL HISTORY][data][][EVER HAD CEREBRAL MALARIA?][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][MEDICAL HISTORY][data][][EVER HAD CEREBRAL MALARIA?][concept][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][MEDICAL HISTORY][data][][EVER HAD CEREBRAL MALARIA?][concept][name]'  value='EVER HAD CEREBRAL MALARIA?' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][MEDICAL HISTORY][data][][EVER HAD CEREBRAL MALARIA?][response][category]'  value='TEXT' )
+
+        select(id='seizure_history' helpText='Any known history of seizure?' tt_requireNextClick='false' tt_onLoad='showCategory("Medical History");' name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][MEDICAL HISTORY][data][][ANY KNOWN HISTORY OF SEIZURE?][response][value]')
+            option
+            option
+                | No
+            option
+                | Yes
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][MEDICAL HISTORY][data][][ANY KNOWN HISTORY OF SEIZURE?][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][MEDICAL HISTORY][data][][ANY KNOWN HISTORY OF SEIZURE?][concept][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][MEDICAL HISTORY][data][][ANY KNOWN HISTORY OF SEIZURE?][concept][name]'  value='ANY KNOWN HISTORY OF SEIZURE?' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][MEDICAL HISTORY][data][][ANY KNOWN HISTORY OF SEIZURE?][response][category]'  value='TEXT' )
+
+        select(id='tb' helpText='History of TB in the past two years?' tt_requireNextClick='false' tt_onLoad='showCategory("Medical History");' name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][MEDICAL HISTORY][data][][HISTORY OF TB IN THE PAST TWO YEARS?][response][value]')
+            option
+            option
+                | No
+            option
+                | Yes
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][MEDICAL HISTORY][data][][HISTORY OF TB IN THE PAST TWO YEARS?][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][MEDICAL HISTORY][data][][HISTORY OF TB IN THE PAST TWO YEARS?][concept][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][MEDICAL HISTORY][data][][HISTORY OF TB IN THE PAST TWO YEARS?][concept][name]'  value='HISTORY OF TB IN THE PAST TWO YEARS?' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][MEDICAL HISTORY][data][][HISTORY OF TB IN THE PAST TWO YEARS?][response][category]'  value='TEXT' )
+
+        select(id='deformities' helpText='Chest deformities at birth?' tt_requireNextClick='false' tt_onLoad='showCategory("Medical History");' name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][MEDICAL HISTORY][data][][CHEST DEFORMITIES AT BIRTH?][response][value]')
+            option
+            option
+                | No
+            option
+                | Yes
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][MEDICAL HISTORY][data][][CHEST DEFORMITIES AT BIRTH?][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][MEDICAL HISTORY][data][][CHEST DEFORMITIES AT BIRTH?][concept][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][MEDICAL HISTORY][data][][CHEST DEFORMITIES AT BIRTH?][concept][name]'  value='CHEST DEFORMITIES AT BIRTH?' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][MEDICAL HISTORY][data][][CHEST DEFORMITIES AT BIRTH?][response][category]'  value='TEXT' )
+
+        select(id='allergic' helpText='Allergic to:' multiple='multiple' tt_pageStyleClass='MultiSelectList' optional='true' tt_onLoad='showCategory("Medical History");'
+                name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][MEDICAL HISTORY][data][][ALLERGIC TO:][response][value]')
+            option
+            option
+                | Exposure to cold water or cold weather
+            option
+                | Exposure to pollen, dust or strong smell
+            option
+                | Change of soap
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][MEDICAL HISTORY][data][][ALLERGIC TO:][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][MEDICAL HISTORY][data][][ALLERGIC TO:][concept][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][MEDICAL HISTORY][data][][ALLERGIC TO:][concept][name]'  value='ALLERGIC TO:' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][MEDICAL HISTORY][data][][ALLERGIC TO:][response][category]'  value='TEXT' )
+
+        select(tt_onLoad='showCategory("Medical History");' id='asthma' helpText='Asthma history in the past month?' tt_requireNextClick='false' name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][MEDICAL HISTORY][data][][ASTHMA HISTORY IN THE PAST MONTH?][response][value]')
+            option
+            option
+                | No
+            option
+                | Yes
+            option
+                | Unknown
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][MEDICAL HISTORY][data][][ASTHMA HISTORY IN THE PAST MONTH?][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][MEDICAL HISTORY][data][][ASTHMA HISTORY IN THE PAST MONTH?][concept][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][MEDICAL HISTORY][data][][ASTHMA HISTORY IN THE PAST MONTH?][concept][name]'  value='ASTHMA HISTORY IN THE PAST MONTH?' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][MEDICAL HISTORY][data][][ASTHMA HISTORY IN THE PAST MONTH?][response][category]'  value='TEXT' )
+
+        select(id='treatment' optional='true' multiple='multiple' tt_pageStyleClass='MultiSelectList' helpText='Chronic Disease medicine patient is taking' tt_onLoad='showCategory("Medical History");'
+                name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][MEDICAL HISTORY][data][][CHRONIC DISEASE MEDICINE PATIENT IS TAKING][response][value]')
+            option
+            - for(var i = 0; i < meds.length; i++) {
+                option
+                    = meds[i]
+            - }
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][MEDICAL HISTORY][data][][CHRONIC DISEASE MEDICINE PATIENT IS TAKING][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][MEDICAL HISTORY][data][][CHRONIC DISEASE MEDICINE PATIENT IS TAKING][concept][UUID]'  value='' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][MEDICAL HISTORY][data][][CHRONIC DISEASE MEDICINE PATIENT IS TAKING][concept][name]'  value='CHRONIC DISEASE MEDICINE PATIENT IS TAKING' )
+        input(type='hidden'  name='data[programs][EPILEPSY PROGRAM][patient_programs][#{program_uuid}][visits][#{today}][MEDICAL HISTORY][data][][CHRONIC DISEASE MEDICINE PATIENT IS TAKING][response][category]'  value='TEXT' )
+
+        input(type='text' name='name209794304746' disabled  id='summary' tt_onLoad='showCategory("Medical History"); showSelectedConditions(); __$("keyboard").style.display = "none";' optional='true' tt_pageStyleClass='NoControls')

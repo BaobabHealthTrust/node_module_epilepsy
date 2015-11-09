@@ -1,0 +1,118 @@
+doctype=html
+html
+    head
+        title= title
+        script(src="/epilepsy/javascripts/form2js.js")
+        script(src="/epilepsy/javascripts/spin.js")
+        script(src="/epilepsy/javascripts/utils.js")
+        script.
+            tt_cancel_destination = "/patient/#{id}";
+            var tstCurrentDate = (new Date()).format("YYYY-mm-dd");
+
+            function __$(id){
+                return document.getElementById(id);
+            }
+            var spinner;
+            function showSpinner() {
+                if (!document.getElementById('spin')) {
+                var div = document.createElement("div");
+                div.id = "spin";
+                div.style.position = "absolute";
+                div.style.top = ((window.innerHeight / 2) - 80) + "px";
+                div.style.left = ((window.innerWidth / 2)) + "px";
+                    document.body.appendChild(div);
+                var opts = {
+                  lines: 15, // The number of lines to draw
+                  length: 15, // The length of each line
+                  width: 8, // The line thickness
+                  radius: 20, // The radius of the inner circle
+                  corners: 1, // Corner roundness (0..1)
+                  rotate: 0, // The rotation offset
+                  color: '#000', // #rgb or #rrggbb
+                  speed: 1, // Rounds per second
+                  trail: 60, // Afterglow percentage
+                  shadow: false, // Whether to render a shadow
+                  hwaccel: false, // Whether to use hardware acceleration
+                  className: 'spinner', // The CSS class to assign to the spinner
+                  zIndex: 2e9, // The z-index (defaults to 2000000000)
+                  top: 25, // Top position relative to parent in px
+                  left: 25 // Left position relative to parent in px
+                };
+            }
+            var target = document.getElementById('spin');
+            target.style.top = (((window.innerHeight / 2) - 80) + document.body.scrollTop) + "px";
+            spinner = new Spinner(opts).spin(target);
+                showShield();
+            }
+            function hideSpinner() {
+                spinner.stop();
+                if (__$("shield")) {
+                    document.body.removeChild(__$("shield"));
+                }
+            }
+            function showShield(action, clickCloses) {
+                if (clickCloses == undefined) {
+                    clickCloses = false;
+                }
+                if (__$("shield")) {
+                    if (__$("spin")) {
+                        document.body.removeChild(__$("spin"));
+                    }
+                    if (__$("popupkeyboard")) {
+                        if (action != undefined) {
+                            eval(action);
+                        }
+                        document.body.removeChild(__$('popupkeyboard'));
+                    }
+                    document.body.removeChild(__$("shield"));
+                } else {
+                    var shield = document.createElement("div");
+                    shield.style.position = "absolute";
+                    shield.style.backgroundColor = "rgba(0,0,0,0.5)";
+                    shield.style.top = (document.body.scrollTop) + "px";
+                    shield.style.left = "0px";
+                    shield.style.width = "100%";
+                    shield.style.height = (window.innerHeight) + "px";
+                    shield.id = "shield";
+                    shield.style.zIndex = 1250;
+                    if (action != undefined) {
+                        shield.setAttribute("action", action);
+                    }
+                    if (clickCloses) {
+                        shield.onmousedown = function () {
+                            if (this.getAttribute("action") != null) {
+                          showShield(this.getAttribute("action"));
+                      } else {
+                          showShield();
+                      }
+                        }
+                    }
+                    document.body.appendChild(shield);
+                }
+            }
+    body(id="container")
+        div(id="content")
+            block mainContent
+            script.
+                document.body.onscroll = function(){
+                    if(__$("shield")){
+                        __$("shield").style.top = (document.body.scrollTop) + "px";
+                    }
+                    if(__$("spin")){
+                        __$("spin").style.top = (((window.innerHeight / 2) - 80) + document.body.scrollTop) + "px";
+                    }
+                }
+                var old = document.body.onresize;
+                document.body.onresize = function(){
+                  if(old){
+                      old();
+                  }
+                  if(__$("shield")){
+                      __$("shield").style.height = (window.innerHeight) + "px";
+                  }
+                  if(__$("spin")){
+                     __$("spin").style.top = (((window.innerHeight / 2) - 80) + document.body.scrollTop) + "px";
+                  }
+                }
+
+        script(src="/touchscreentoolkit/lib/javascripts/touchScreenToolkit.js" defer)
